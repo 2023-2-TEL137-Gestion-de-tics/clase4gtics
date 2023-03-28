@@ -1,7 +1,9 @@
 package com.example.clase4gtics.controller;
 
 import com.example.clase4gtics.entity.Product;
+import com.example.clase4gtics.repository.CategoryRepository;
 import com.example.clase4gtics.repository.ProductRepository;
+import com.example.clase4gtics.repository.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,10 +19,16 @@ import java.util.Optional;
 @RequestMapping("/product")
 public class ProductController {
 
+    final CategoryRepository categoryRepository;
     final ProductRepository productRepository;
+    final SupplierRepository supplierRepository;
 
-    public ProductController(ProductRepository productRepository) {
+    public ProductController(ProductRepository productRepository,
+                             CategoryRepository categoryRepository,
+                             SupplierRepository supplierRepository) {
         this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
+        this.supplierRepository = supplierRepository;
     }
 
     @GetMapping(value = {"", "/"})
