@@ -38,7 +38,9 @@ public class ProductController {
     }
 
     @GetMapping("/new")
-    public String nuevoProductoFrm() {
+    public String nuevoProductoFrm(Model model) {
+        model.addAttribute("listaCategorias",categoryRepository.findAll());
+        model.addAttribute("listaProveedores",supplierRepository.findAll());
         return "product/newFrm";
     }
 
@@ -56,6 +58,8 @@ public class ProductController {
         if (optProduct.isPresent()) {
             Product product = optProduct.get();
             model.addAttribute("product", product);
+            model.addAttribute("listaCategorias",categoryRepository.findAll());
+            model.addAttribute("listaProveedores",supplierRepository.findAll());
             return "product/editFrm";
         } else {
             return "redirect:/product";
